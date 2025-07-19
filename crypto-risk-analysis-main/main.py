@@ -39,8 +39,12 @@ st.set_page_config(
 )
 
 # Load custom CSS
-with open("assets/custom.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+try:
+    with open("assets/custom.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+except FileNotFoundError:
+    st.warning("Custom CSS file not found. Using default styles.")
+
 
 # Initialize session state
 if "selected_coin" not in st.session_state:
